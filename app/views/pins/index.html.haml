@@ -1,9 +1,9 @@
 %h1 Pins index
-%h3= link_to '[ + Pin ]', new_pin_path
+=link_to '[ + Pin ]', new_pin_path
 
 -@pins.each do |pin|
   %h2= link_to pin.title, pin_path( pin )
   %p
     =pin.description
     =link_to '[ Edit ]', edit_pin_path( pin )
-    =link_to '[ Delete ]', pin_path( pin ), method: :delete, data:{ confirm:'Are you sure?' }
+    =link_to '[ Delete ]', pin, method: :delete, data:{ confirm:'Are you sure?' }

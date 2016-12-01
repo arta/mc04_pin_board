@@ -2,19 +2,19 @@ class PinsController < ApplicationController
   before_action :set_pin, only: [:show, :edit, :update, :destroy]
 
   # GET /pins
-  # link_to pins_path
+  # link_to .. pins_path
   def index
-    @pins = Pin.all
+    @pins = Pin.order( created_at: :desc )
   end
 
   # GET /pins/new
-  # link_to new_pin_path
+  # link_to .. new_pin_path
   def new
     @pin = Pin.new
   end
 
   # POST /pins
-  # form_for( @pin )                  if new_record?
+  # form_for @pin                 if new_record?
   def create
     @pin = Pin.new pin_params
     if @pin.save
@@ -25,17 +25,18 @@ class PinsController < ApplicationController
   end
 
   # GET /pins/:id
-  # link_to pin_path( @pin )
+  # link_to .. @pin [ pin_path( @pin ) ]
+  #   [ pass @pin in /index; supplied implicitly in responses to requests with :id ]
   def show; end
 
   # GET /pins/:id/edit
-  # link_to edit_pin_path( @pin )
-  #   pass @pin in /index; implicit in /show (read from request)
+  # link_to .. edit_pin_path( @pin )
+  #   [ pass @pin in /index; supplied implicitly in responses to requests with :id ]
   def edit; end
 
   # PATCH /pins/:id
   # PUT /pins/:id
-  # form_for ( @pin )                 if persisted?
+  # form_for @pin                 if persisted?
   def update
     if @pin.update pin_params
       redirect_to @pin, notice: 'Pin successfully updated.'
@@ -45,11 +46,11 @@ class PinsController < ApplicationController
   end
 
   # DELETE /pins/:id
-  # link_to pin_path( @pin ) method: :delete
-  #   pass @pin in /index; implicit in /show (read from request)
+  # link_to .. @pin [ pin_path( @pin ) ], method: :delete
+  #   [ pass @pin in /index; supplied implicitly in responses to requests with :id ]
   def destroy
     @pin.destroy
-    redirect_to pins_path, notice: 'Pin successfully destroyed.'
+    redirect_to root_path, notice: 'Pin successfully destroyed.'
   end
 
   private
