@@ -25,6 +25,8 @@ group :development do
 end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# 12-1-16:
+gem 'devise', '~> 4.2'
 # 11-30-16:
 gem 'haml-rails', '~> 0.9.0'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   # resources :pins
   get    'pins',          to: 'pins#index'
   get    'pins/new',      to: 'pins#new', as: 'new_pin' # must precede greedy `GET 'pins/:id'`
