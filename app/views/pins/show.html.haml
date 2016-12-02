@@ -1,7 +1,10 @@
 %h1= @pin.title
 %p= @pin.description
-
-=link_to '[ Back ]',    root_path
--# no need to pass @pin, the pin id is read from the request ( params[:id] )
-=link_to '[ Edit ]',    edit_pin_path
-=link_to '[ Destroy ]', @pin, method: :delete, data:{ confirm:'Are you sure?' }
+%p
+  Submitted by
+  =@pin.user.email
+  %br
+  =link_to '[ Back ]',    root_path
+  -# no need to pass @pin, the pin id is read from the request ( params[:id] )
+  =link_to '[ Edit ]',    edit_pin_path
+  =link_to '[ Destroy ]', @pin, method: :delete, data:{ confirm:'Are you sure?' }

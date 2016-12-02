@@ -10,13 +10,15 @@ class PinsController < ApplicationController
   # GET /pins/new
   # link_to .. new_pin_path
   def new
-    @pin = Pin.new
+    @pin = current_user.pins.new
+    # @pin = Pin.new
   end
 
   # POST /pins
   # form_for @pin                 if new_record?
   def create
-    @pin = Pin.new pin_params
+    @pin = current_user.pins.new pin_params
+    # @pin = Pin.new pin_params
     if @pin.save
       redirect_to @pin, notice: 'Pin successfully created.'
     else

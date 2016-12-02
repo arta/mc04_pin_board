@@ -3,7 +3,9 @@
 
 -@pins.each do |pin|
   %h2= link_to pin.title, pin_path( pin )
+  %p= pin.description
   %p
-    =pin.description
+    Submitted by
+    =pin.user.email
     =link_to '[ Edit ]', edit_pin_path( pin )
     =link_to '[ Delete ]', pin, method: :delete, data:{ confirm:'Are you sure?' }
