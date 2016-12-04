@@ -10,3 +10,10 @@
           =pin.user.email
           -# =link_to '[ Edit ]', edit_pin_path( pin )
           -# =link_to '[ Delete ]', pin, method: :delete, data:{ confirm:'Are you sure?' }
+      .panel-footer
+        =link_to like_pin_path( pin ), method: :put, class:'btn btn-default btn-sm' do
+          %span.glyphicon.glyphicon-heart
+          =pin.get_upvotes.size
+        =link_to dislike_pin_path( pin ), method: :put, class:'btn btn-default btn-sm' do
+          %span.glyphicon.glyphicon-thumbs-down
+          =pin.get_downvotes.size

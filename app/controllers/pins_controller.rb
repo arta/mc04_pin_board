@@ -1,5 +1,5 @@
 class PinsController < ApplicationController
-  before_action :set_pin, only: [:show, :edit, :update, :destroy]
+  before_action :set_pin, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   # GET /pins
   # link_to .. pins_path
@@ -29,6 +29,7 @@ class PinsController < ApplicationController
   # GET /pins/:id
   # link_to .. @pin [ pin_path( @pin ) ]
   #   [ pass @pin in /index; supplied implicitly in responses to requests with :id ]
+  # redirect_to @pin
   def show; end
 
   # GET /pins/:id/edit
@@ -53,6 +54,23 @@ class PinsController < ApplicationController
   def destroy
     @pin.destroy
     redirect_to root_path, notice: 'Pin successfully destroyed.'
+  end
+
+  # CUSTOM ACTIONS ############################################
+  # PUT /pins/:id/like
+  # link_to like_pin_path( @pin ), method: :put do
+  def upvote
+    @pin.upvote_by current_user
+    redirect_to :back, notice: 'Pin was upvoted!'
+    # redirect_to request.referer || root_path, notice:'Link upvoted!'
+  end
+
+  # PUT /pins/:id/dislike
+  # link_to dislike_pin_path( @pin ), method: :put do
+  def downvote
+    @pin.downvote_by current_user
+    redirect_to :back, notice: 'Pin was downvoted!'
+     # redirect_to request.referer || root_path, notice:'Link downvoted!'
   end
 
   private
