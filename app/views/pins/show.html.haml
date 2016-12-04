@@ -19,6 +19,7 @@
               =link_to dislike_pin_path( @pin ), method: :put, class:'btn btn-default' do
                 %span.glyphicon.glyphicon-thumbs-down
                 =@pin.get_downvotes.size
+            -if @pin.user == current_user
               -# no need to pass @pin, the pin id is read from the request ( params[:id] )
               =link_to 'Edit', edit_pin_path, class:'btn btn-default'
               =link_to 'Destroy', @pin, method: :delete, data:{ confirm:'Are you sure?' }, class:'btn btn-default'
