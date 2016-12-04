@@ -26,6 +26,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # 12-2-16:
+gem 'masonry-rails', '~> 0.2.4'
 gem 'paperclip', '~> 5.1'
 # 12-1-16:
 gem 'devise', '~> 4.2'

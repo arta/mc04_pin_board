@@ -1,9 +1,12 @@
--@pins.each do |pin|
-  =link_to image_tag( pin.image.url( :medium ) ), pin
-  %h2= link_to pin.title, pin_path( pin ) 
-  %p= pin.description
-  %p
-    Submitted by
-    =pin.user.email
-    =link_to '[ Edit ]', edit_pin_path( pin )
-    =link_to '[ Delete ]', pin, method: :delete, data:{ confirm:'Are you sure?' }
+#pins.transitions-enabled
+  -@pins.each do |pin|
+    .box.panel.panel-default
+      =link_to ( image_tag pin.image.url ), pin
+      .panel-body
+        %h2= link_to pin.title, pin
+        -# %p= pin.description
+        %p.user
+          Submitted by
+          =pin.user.email
+          -# =link_to '[ Edit ]', edit_pin_path( pin )
+          -# =link_to '[ Delete ]', pin, method: :delete, data:{ confirm:'Are you sure?' }
