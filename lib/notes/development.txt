@@ -1,0 +1,25 @@
+• 12-4-16:
+• Homework:
+:: Add comments to pins
+:: Add users profiles
+:: List users' pins on their profiles
+
+• 12-2-16:
+• unstaging already staged (but not committed) paperclip attachments on Pins
+:: 1) add `/public/system/*/images` to .gitignore and save it
+:: 2) $ git reset HEAD public/system/pins/images/*
+
+• 12-1-16:
+$ rails g simple_form:install --bootstrap
+> returned:
+===============================================================================
+
+  Be sure to have a copy of the Bootstrap stylesheet available on your
+  application, you can get it on http://getbootstrap.com/.
+
+  Inside your views, use the 'simple_form_for' with one of the Bootstrap form
+  classes, '.form-horizontal' or '.form-inline', as the following:
+
+    = simple_form_for(@user, html: { class: 'form-horizontal' }) do |form|
+
+===============================================================================
