@@ -1,25 +1,30 @@
 .row#pin_show
-  .col-md-8.col-md-offset-2
+  .col-xs-10.col-xs-offset-1.col-sm-6.col-sm-offset-3
     .panel.panel-default
-      .panel-heading.pin_image= image_tag @pin.image.url
+      .panel-heading.pin_image= image_tag @pin.image.url( :medium )
       .panel-body
         %h1= @pin.title
         %p.description= @pin.description
       .panel-footer
         .row
-          .col-md-6
+          .col-xs-7
             %p.user
-              Submitted by
-              =@pin.user.email
-          .col-md-6
-            .btn-group.pull-right
-              =link_to like_pin_path( @pin ), method: :put, class:'btn btn-default' do
-                %span.glyphicon.glyphicon-heart
-                =@pin.get_upvotes.size
-              =link_to dislike_pin_path( @pin ), method: :put, class:'btn btn-default' do
-                %span.glyphicon.glyphicon-thumbs-down
-                =@pin.get_downvotes.size
+              By
+              -if @pin.user == current_user
+                myself
+              -else
+                =@pin.user.email
+          .col-xs-5
+            -unless @pin.user == current_user
+              .btn-group.pull-right
+                =link_to like_pin_path( @pin ), method: :put, class:'btn btn-default' do
+                  %span.glyphicon.glyphicon-heart
+                  =@pin.get_upvotes.size
+                =link_to dislike_pin_path( @pin ), method: :put, class:'btn btn-default' do
+                  %span.glyphicon.glyphicon-thumbs-down
+                  =@pin.get_downvotes.size
             -if @pin.user == current_user
-              -# no need to pass @pin, the pin id is read from the request ( params[:id] )
-              =link_to 'Edit', edit_pin_path, class:'btn btn-default'
-              =link_to 'Destroy', @pin, method: :delete, data:{ confirm:'Are you sure?' }, class:'btn btn-default'
+              .btn-group.pull-right
+                -# no need to pass @pin, the pin id is read from the request ( params[:id] )
+                =link_to 'Edit', edit_pin_path, class:'btn btn-default'
+                =link_to 'Destroy', @pin, method: :delete, data:{ confirm:'Are you sure?' }, class:'btn btn-default'

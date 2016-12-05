@@ -1,19 +1,22 @@
 #pins.transitions-enabled
   -@pins.each do |pin|
     .box.panel.panel-default
-      =link_to ( image_tag pin.image.url ), pin
+      =link_to ( image_tag pin.image.url( :medium ) ), pin
       .panel-body
         %h2= link_to pin.title, pin
-        -# %p= pin.description
-        %p.user
-          Submitted by
-          =pin.user.email
-          -# =link_to '[ Edit ]', edit_pin_path( pin )
-          -# =link_to '[ Delete ]', pin, method: :delete, data:{ confirm:'Are you sure?' }
       .panel-footer
-        =link_to like_pin_path( pin ), method: :put, class:'btn btn-default btn-sm' do
-          %span.glyphicon.glyphicon-heart
-          =pin.get_upvotes.size
-        =link_to dislike_pin_path( pin ), method: :put, class:'btn btn-default btn-sm' do
-          %span.glyphicon.glyphicon-thumbs-down
-          =pin.get_downvotes.size
+        .row
+          %p.user{ style:'border-top:0;' }
+            By
+            -if pin.user == current_user
+              myself
+            -else
+              =pin.user.email
+          -unless pin.user == current_user
+            .row
+              =link_to like_pin_path( pin ), method: :put, class:'btn btn-default btn-sm' do
+                %span.glyphicon.glyphicon-heart
+                =pin.get_upvotes.size
+              =link_to dislike_pin_path( pin ), method: :put, class:'btn btn-default btn-sm' do
+                %span.glyphicon.glyphicon-thumbs-down
+                =pin.get_downvotes.size
