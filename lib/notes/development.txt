@@ -1,9 +1,3 @@
-• 12-4-16:
-• Homework:
-:: Add comments to pins
-:: Add users profiles
-:: List users' pins on their profiles
-
 • 12-2-16:
 • unstaging already staged (but not committed) paperclip attachments on Pins
 :: 1) add `/public/system/*/images` to .gitignore and save it

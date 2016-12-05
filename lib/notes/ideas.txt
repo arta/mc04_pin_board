@@ -1,0 +1,5 @@
+• 12-4-16:
+• Homework:
+:: Add comments to pins
+:: Add users profiles
+:: List users' pins on their profiles
