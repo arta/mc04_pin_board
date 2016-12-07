@@ -25,6 +25,14 @@
                   =@pin.get_downvotes.size
             -if @pin.user == current_user
               .btn-group.pull-right
-                -# no need to pass @pin, the pin id is read from the request ( params[:id] )
-                =link_to 'Edit', edit_pin_path, class:'btn btn-default'
+                =link_to 'Edit', edit_pin_path( @pin ), class:'btn btn-default'
                 =link_to 'Destroy', @pin, method: :delete, data:{ confirm:'Are you sure?' }, class:'btn btn-default'
+
+      .panel-body
+        -# contrast with a01_raddit:
+        %h3 Comments
+        -if @pin.comments.present?
+          =render @pin.comments
+        =simple_form_for [ @pin, @pin.comments.new ] do |f|
+          =f.input :body, label:false, input_html:{ rows:2, style:'min-height:0 !important;', class:'form-control', placeholder:'Your thoughts?' }
+          =f.button :submit, class:'btn btn-secondary'

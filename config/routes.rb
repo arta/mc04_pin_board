@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
-
+  resources :comments, only: :destroy
   resources :pins do
     member do
       # acts_as_votable:
       put 'like', to: 'pins#upvote'       # PUT /pins/:id/like      like_pin_path( @pin )
       put 'dislike', to: 'pins#downvote'  # PUT /pins/:id/dislike   dislike_pin_path( @pin )
     end
+    resources :comments, only: :create
   end
 
   # get    'pins',          to: 'pins#index'
