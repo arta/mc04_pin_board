@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   # POST /pins/:pin_id/comments
   # pin_comments_path( @pin ), method: :post
-  # form_for [ @pin, @pin.comments.new ]       ... on 'pins#show' page
+  # form_for [ @pin, @pin.comments.new ]       ... on pins#show page
   def create
     @pin = Pin.find params[:pin_id]
     @comment = @pin.comments.new( comment_params )
