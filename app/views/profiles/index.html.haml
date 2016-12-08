@@ -1,0 +1,23 @@
+%h1 Listing profiles
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Username
+      %th Name
+      %th Dob
+      %th Location
+      %th Hobbies
+      %th Profession
+
+  %tbody
+    - @profiles.each do |profile|
+      %tr
+        %td= profile.user_id
+        %td= link_to profile.username, profile
+        %td= profile.name
+        %td= profile.dob
+        %td= profile.location
+        %td= profile.hobbies
+        %td= profile.profession

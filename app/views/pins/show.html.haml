@@ -11,9 +11,9 @@
             %p.user
               By
               -if @pin.user == current_user
-                myself
+                =link_to 'Myself', profile_path( @pin.user.profile )
               -else
-                =@pin.user.email
+                =link_to @pin.user.profile.username, profile_path( @pin.user.profile )
           .col-xs-5
             -unless @pin.user == current_user
               .btn-group.pull-right

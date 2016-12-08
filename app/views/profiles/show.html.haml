@@ -1,0 +1,26 @@
+%p
+  %b User:
+  = @profile.user
+%p
+  %b Username:
+  = @profile.username
+%p
+  %b Name:
+  = @profile.name
+%p
+  %b Dob:
+  = @profile.dob
+%p
+  %b Location:
+  = @profile.location
+%p
+  %b Hobbies:
+  = @profile.hobbies
+%p
+  %b Profession:
+  = @profile.profession
+
+-if @profile.user == current_user
+  =link_to 'Edit', edit_profile_path
+  |
+=link_to 'Profiles', profiles_path

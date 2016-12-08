@@ -1,0 +1,46 @@
+###############################################################################
+• Working out updating a singular resource (profile):
+# 12-8-16: ####################################################################
+• Order matters but the 12-7-16 "solution" had its own downfall:
+: Drawing resources as both, singular and plural competes for path helper names.
+: Specifically (showing only the conflicting directives), in
+    resource  :profile,  only: :update
+    resources :profiles, only: :index
+: both directives claim `profile_path`, but only the 1st is named, the 2nd is nameless:
+    put '/profile',      to: 'profiles#update', as: 'profile'
+    get '/profiles/:id', to: 'profiles#index'
+: Now profile(s) paths and path helpers are broken; it's a mess. Particularly
+  since `profile_path` is to be used in `form_for @profile, url:profile_path ..`
+  per http://guides.rubyonrails.org/routing.html#singular-resources
+
+• Solution: set up `update_profile_path` to keep other path helpers named
+  consistently with Rails conventions. Plus, `update_..`, although nowhere declared
+  by Rails, actually is consistent with Rails path naming conventions; looks clean.
+
+• routes.rb
+    resources :profiles,      only: [:index, :show]
+    # resource :profile,      only: :edit # declare manually for visual consistency:
+    get       'profile/edit', to: 'profiles#edit',   as: 'edit_profile'
+    match     'profile',      to: 'profiles#update', as: 'update_profile', via: [:patch, :put]
+
+# 12-7-16: ####################################################################
+• from http://guides.rubyonrails.org/routing.html#singular-resources
+    A long-standing bug prevents form_for from working automatically with singular
+    resources. As a workaround, specify the URL for the form directly, like so:
+
+    form_for @geocoder, url: geocoder_path do |f|
+
+: But `simple_form_for @profile, url: profile_path ..` yielded error message:
+    ActionController::UrlGenerationError at /my_profile
+    No route matches {:action=>"show", :controller=>"profiles"} missing
+    required keys: [:id]
+: The issue was, of course, order of drawing :profiles and :profile
+: Drawing :profiles 1st returns:
+    GET /profiles/:id, to: profiles#show, as: profile_path
+: Solution: drawing :profile 1st returns the needed:
+    PATCH|PUT /profile, to: profiles#update, as: profile_path
+
+• routes.rb:
+    resource  :profile,  only: [:edit, :update]
+    resources :profiles, only: [:index, :show]
+###############################################################################

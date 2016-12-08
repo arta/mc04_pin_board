@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :pins
   has_many :comments
+  has_one  :profile
 end

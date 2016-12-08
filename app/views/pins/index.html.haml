@@ -9,9 +9,9 @@
           %p.user{ style:'border-top:0;' }
             By
             -if pin.user == current_user
-              myself
+              =link_to 'Myself', profile_path( pin.user.profile )
             -else
-              =pin.user.email
+              =link_to pin.user.profile.username, profile_path( pin.user.profile )
           -unless pin.user == current_user
             .row
               =link_to like_pin_path( pin ), method: :put, class:'btn btn-default btn-sm' do

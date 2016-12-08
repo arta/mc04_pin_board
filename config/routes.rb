@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+
   resources :comments, only: :destroy
   resources :pins do
     member do
@@ -22,6 +23,12 @@ Rails.application.routes.draw do
   # # patch 'pins/:id',      to: 'pins#update'
   # # put   'pins/:id',      to: 'pins#update'
   # delete 'pins/:id',      to: 'pins#destroy'
+
+  # 12-8-16: for debugging saga of plural and singular, see /lib/notes/debugging
+  # 12-6-16: add user profiles
+  resources :profiles,      only: [:index, :show]
+  get       'profile/edit', to: 'profiles#edit',   as: 'edit_profile'
+  match     'profile',      to: 'profiles#update', as: 'update_profile', via: [:patch, :put]
 
   root 'pins#index'
 end

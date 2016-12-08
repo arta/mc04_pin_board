@@ -1,19 +1,61 @@
-• 12-2-16:
-• unstaging already staged (but not committed) paperclip attachments on Pins
-:: 1) add `/public/system/*/images` to .gitignore and save it
-:: 2) $ git reset HEAD public/system/pins/images/*
+###############################################################################
+# 12-8-16: ####################################################################
+• Removing /my_profile path (in favor of sticking with Rails defaults wherever
+  possible).
+: Jotting down how to tell devise to authenticate custom named path.
+: https://github.com/plataformatec/devise/wiki/How-To:-Define-resource-actions-that-require-authentication-using-routes.rb
+: routes.rb
+    authenticate :user do
+      get 'my_profile', to: 'profiles#edit', as: 'my_profile' #<= not needed, nice to have
+      # consistent with devise DSL, but not with Rails for singular resource:
+      get 'profiles/edit', to: 'profiles#edit', as: 'edit_user_profile'
+    end
+###############################################################################
 
-• 12-1-16:
+
+
+###############################################################################
+# 12-6-16: ####################################################################
+• While adding profiles to users, I was figuring out how to treat errors when:
+: 1) accessing non-existent profile: /profiles/3 <= user not found
+: 2) accessing own profile while not signed in: /my_profile <= not signed in
+: http://stackoverflow.com/questions/20728304/rails-singular-resources-is-not-working-as-expected
+: http://stackoverflow.com/questions/6664822/rails-how-to-redirect-if-record-is-not-found
+: http://guides.rubyonrails.org/action_controller_overview.html#rescue-from ... caution advised
+: This was the working solution in profiles#show action:
+
+    def show
+      params[:id] ? set_profile : @profile = current_user.profile
+    rescue ActiveRecord::RecordNotFound
+      redirect_to request.referer || root_path, notice: 'User profile not found.'
+    rescue NoMethodError # rescue getting my_profile without current_user
+      redirect_to request.referer || root_path, notice: 'User profile not found.'
+    end
+
+: Then I realized that I could use:
+: : devise for 1)
+: : Rail's own rescue_from for 2)
+###############################################################################
+
+
+
+###############################################################################
+# 12-2-16: ####################################################################
+• un-staging already staged (but not committed) paperclip attachments on Pins
+: 1) add `/public/system/*/images` to .gitignore and save it
+: 2) $ git reset HEAD public/system/pins/images/*
+###############################################################################
+
+
+###############################################################################
+# 12-1-16: ####################################################################
 $ rails g simple_form:install --bootstrap
 > returned:
 ===============================================================================
-
   Be sure to have a copy of the Bootstrap stylesheet available on your
   application, you can get it on http://getbootstrap.com/.
-
   Inside your views, use the 'simple_form_for' with one of the Bootstrap form
   classes, '.form-horizontal' or '.form-inline', as the following:
-
     = simple_form_for(@user, html: { class: 'form-horizontal' }) do |form|
-
 ===============================================================================
+###############################################################################

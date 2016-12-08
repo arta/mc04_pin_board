@@ -1,0 +1,16 @@
+-# adopted from `A long-standing bug prevents ...`
+-#   http://guides.rubyonrails.org/routing.html#singular-resources
+-#   since we use both singular and plural resources, we set update_profile_path
+-#   consistent with Rails apparent path naming conventions
+-# see /lib/notes/debugging
+=simple_form_for( @profile, url: update_profile_path ) do |f|
+  =f.error_notification
+  .form-inputs
+    -# =f.association :user
+    =f.input :username
+    =f.input :name
+    =f.input :dob
+    =f.input :location
+    =f.input :hobbies
+    =f.input :profession
+  .form-actions= f.button :submit
