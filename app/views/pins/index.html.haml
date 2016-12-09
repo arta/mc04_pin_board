@@ -7,16 +7,7 @@
       .panel-footer
         .row
           %p.user{ style:'border-top:0;' }
-            By
-            -if pin.user == current_user
-              =link_to 'Myself', profile_path( pin.user.profile )
-            -else
-              =link_to pin.user.profile.username, profile_path( pin.user.profile )
+            -link_to_user_profile_of( pin )
           -unless pin.user == current_user
             .row
-              =link_to like_pin_path( pin ), method: :put, class:'btn btn-default btn-sm' do
-                %span.glyphicon.glyphicon-heart
-                =pin.get_upvotes.size
-              =link_to dislike_pin_path( pin ), method: :put, class:'btn btn-default btn-sm' do
-                %span.glyphicon.glyphicon-thumbs-down
-                =pin.get_downvotes.size
+              -like_dislike_buttons_for( pin )
