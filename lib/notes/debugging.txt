@@ -1,4 +1,25 @@
 ###############################################################################
+# 12-8-16: ####################################################################
+• Updating devise User deletes associated nested Profile  !!!
+: /app/views/devise/registrations/edit.html.haml:
+    =form_for resource ... =fields_for :profile ...
+
+• Reason (read from server output):
+  > Unpermitted parameter: id
+: turns out nested fields have a hidden field for `id` of the nested resource
+  ( in this case: user[profile_attributes][id] )
+
+• Solution:
+: profile.id (profile_attributes[:id]) must be permitted
+  in devise_parameter_sanitizer (presently in ApplicationController):
+  ...
+    devise_parameter_sanitizer.permit( :sign_up, keys: [ profile_attributes: [:id, ...] ] )
+  ...
+###############################################################################
+
+
+
+###############################################################################
 • Working out updating a singular resource (profile):
 # 12-8-16: ####################################################################
 • Order matters but the 12-7-16 "solution" had its own downfall:
