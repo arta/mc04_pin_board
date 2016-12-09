@@ -1,5 +1,9 @@
+• 12-8-16:
+• Homework :: Add comments to pins                 <= done
+• Homework :: Add users profiles                   <= done
+
 • 12-4-16:
 • Homework:
-:: Add comments to pins
-:: Add users profiles
-:: List users' pins on their profiles
+: Add comments to pins
+: Add users profiles
+: List users' pins on their profiles
