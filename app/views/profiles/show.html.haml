@@ -20,6 +20,18 @@
   %b Profession:
   = @profile.profession
 
+-if @profile.user.pins.present?
+  %h2 Pinned:
+  %ul
+    -@profile.user.pins.each do |pin|
+      %li
+        =link_to pin.title, pin
+        =pin.description
+
+
+
+%br
+
 -if @profile.user == current_user
   =link_to 'Edit', edit_profile_path
   |
