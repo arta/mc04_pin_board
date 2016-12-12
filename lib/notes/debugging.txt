@@ -1,4 +1,12 @@
 ###############################################################################
+# 12-11-16: ###################################################################
+• Adding explanatory note to the strong params gotcha from 12-8-16:
+: see cocoon gem author's alert notice:
+  https://github.com/nathanvda/cocoon#strong-parameters-gotcha
+###############################################################################
+
+
+###############################################################################
 # 12-8-16: ####################################################################
 • Updating devise User deletes associated nested Profile  !!!
 : /app/views/devise/registrations/edit.html.haml:
