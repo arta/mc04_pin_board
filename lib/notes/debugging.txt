@@ -1,4 +1,12 @@
 ###############################################################################
+# 12-25-16: ###################################################################
+• Adding explanatory note to recurring issue with turbolinks and jQuery:
+: see `pins.coffee` for working solution (hack?), and its source:
+: http://stackoverflow.com/questions/18770517/rails-4-how-to-use-document-ready-with-turbo-links
+###############################################################################
+
+
+###############################################################################
 # 12-11-16: ###################################################################
 • Adding explanatory note to the strong params gotcha from 12-8-16:
 : see cocoon gem author's alert notice:
